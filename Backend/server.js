@@ -1,5 +1,6 @@
 import express from "express";
 import authRoutes from "./Routes/auth.routes.js"
+import connectToDB from './DB/DBConnect.js'
 
 const app = express();
 
@@ -11,4 +12,8 @@ app.get("/", (req, res) =>{
 
 app.use("/api/auth", authRoutes)
 
-app.listen(port, () => console.log(`Server running on http://localhost:${port}/`));
+app.listen(port, () => {
+    connectToDB();
+    console.log(`Server running on http://localhost:${port}/`);
+
+});
