@@ -3,14 +3,14 @@ import authRoutes from "./Routes/auth.routes.js"
 import connectToDB from './DB/DBConnect.js'
 
 const app = express();
-
 const port = 5000;
 
-app.get("/", (req, res) =>{
-    res.send("Hello World")
-});
-
+app.use(express.json());
 app.use("/api/auth", authRoutes)
+
+app.get("/", (req, res) =>{
+    res.send("Hello World!")
+});
 
 app.listen(port, () => {
     connectToDB();
