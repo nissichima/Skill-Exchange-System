@@ -1,12 +1,22 @@
 import express from "express";
-import authRoutes from "./Routes/auth.routes.js"
+import cookieParser from "cookie-parser";
+import dotenv from 'dotenv';
+
 import connectToDB from './DB/DBConnect.js'
+import authRoutes from "./Routes/auth.routes.js"
+import messageRoutes from "./Routes/message.routes.js"
+
+dotenv.config();
 
 const app = express();
 const port = 5000;
 
 app.use(express.json());
+app.use(cookieParser());
+
 app.use("/api/auth", authRoutes)
+app.use("/api/messages", messageRoutes)
+
 
 app.get("/", (req, res) =>{
     res.send("Hello World!")
@@ -15,5 +25,4 @@ app.get("/", (req, res) =>{
 app.listen(port, () => {
     connectToDB();
     console.log(`Server running on http://localhost:${port}/`);
-
 });

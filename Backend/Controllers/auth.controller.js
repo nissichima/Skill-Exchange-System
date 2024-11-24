@@ -1,5 +1,5 @@
-import generateToken from '../../GenerateToken.js';
-import User from '../Models/User.js'
+import generateToken from '../GenerateToken.js';
+import User from '../Models/user.model.js'
 import bcrypt from "bcryptjs"
 
 export const signup = async(req, res) =>{
@@ -38,7 +38,7 @@ export const signup = async(req, res) =>{
             generateToken(newUser._id, res);
             await newUser.save();
             
-            res.status(201).json({message:"Successfully created", user})
+            res.status(201).json({message:"Successfully created", newUser})
         
         }else{
             res.status(400).json({error:"Invalid user data"})
