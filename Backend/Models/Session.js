@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         required:true        
     },
     duration:{
-        type:Int,
+        type:Number,
         required:true        
     },
     locationType:{
@@ -28,6 +28,6 @@ const userSchema = new mongoose.Schema({
     }    
 });
 
-const User = mongoose.model("Session", userSchema);
+const Session = mongoose.model("Session", userSchema);
 
 export default Session;
