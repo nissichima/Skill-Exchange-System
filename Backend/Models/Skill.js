@@ -20,6 +20,6 @@ const userSchema = new mongoose.Schema({
     }    
 });
 
-const User = mongoose.model("Skill", userSchema);
+const Skill = mongoose.model("Skill", userSchema);
 
 export default Skill;
