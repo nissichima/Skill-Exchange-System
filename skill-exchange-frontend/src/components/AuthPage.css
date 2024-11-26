@@ -72,16 +72,7 @@ input {
   align-items: center;
 }
 
-.forgot-password {
-  background: none;
-  border: none;
-  color: #84CEEB;
-  cursor: pointer;
-  font-size: 0.9rem;
-  text-decoration: underline;
-}
-
-/* Buttons for login/sign-up */
+.forgot-password,
 .auth-button {
   background: #5AB9EA;
   color: #ffffff;
@@ -89,10 +80,14 @@ input {
   padding: 0.7rem;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 1rem;
   font-weight: bold;
+  text-align: center;
+  transition: background 0.3s ease;
+  width: calc(50% - 0.5rem); /* Equal size for both buttons */
 }
 
+.forgot-password:hover,
 .auth-button:hover {
   background: #84CEEB;
 }
