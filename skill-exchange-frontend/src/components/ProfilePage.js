@@ -4,7 +4,7 @@ import './ProfilePage.css';
 const ProfilePage = () => {
   const [name, setName] = useState("John Doe");
   const [isEditing, setIsEditing] = useState(false);
-
+  const [currentSection, setCurrentSection] = useState("Profile");
   const handleEdit = () => setIsEditing(true);
   const handleSave = () => setIsEditing(false);
 
@@ -12,15 +12,67 @@ const ProfilePage = () => {
     <main className="profile-page">
       {/* Header */}
       <header className="profile-header">
-        <h1>SkillShare</h1>
-        <nav className="nav-bar">
-          <a href="#browse-skills">Browse Skills</a>
-          <a href="#set-up-session">Set Up Session</a>
-          <a href="#history">History</a>
-          <a href="#messages">Messages</a>
-          <a href="#profile" className="active">Profile</a>
-          <a href="#logout">Logout</a>
-        </nav>
+        <div className="logo">
+          <a href="/" className="logo-link">
+            SkillShare
+          </a>
+        </div>
+        <ul className="nav-links">
+          <li>
+            <a
+              href="#browse-skills"
+              onClick={() => setCurrentSection("Browse Skills")}
+              className={currentSection === "Browse Skills" ? "active" : ""}
+            >
+              Browse Skills
+            </a>
+          </li>
+          <li>
+            <a
+              href="#set-up-session"
+              onClick={() => setCurrentSection("Set Up Session")}
+              className={currentSection === "Set Up Session" ? "active" : ""}
+            >
+              Set Up Session
+            </a>
+          </li>
+          <li>
+            <a
+              href="#history"
+              onClick={() => setCurrentSection("History")}
+              className={currentSection === "History" ? "active" : ""}
+            >
+              History
+            </a>
+          </li>
+          <li>
+            <a
+              href="#messages"
+              onClick={() => setCurrentSection("Messages")}
+              className={currentSection === "Messages" ? "active" : ""}
+            >
+              Messages
+            </a>
+          </li>
+          <li>
+            <a
+              href="#profile"
+              onClick={() => setCurrentSection("Profile")}
+              className={currentSection === "Profile" ? "active" : ""}
+            >
+              Profile
+            </a>
+          </li>
+          <li>
+            <a
+              href="#logout"
+              onClick={() => setCurrentSection("Logout")}
+              className={currentSection === "Logout" ? "active" : ""}
+            >
+              Logout
+            </a>
+          </li>
+        </ul>
       </header>
 
       {/* Main Profile Section */}
