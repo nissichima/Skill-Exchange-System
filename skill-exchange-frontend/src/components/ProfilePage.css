@@ -1,0 +1,144 @@
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.profile-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Gradient background */
+  background: linear-gradient(
+    45deg,
+    #84ceeb,
+    #c1c8e4,
+    #8860d0
+  );
+  background-size: 400% 400%; /* Makes gradient cover the entire page */
+  animation: gradient 15s ease infinite;
+
+  /* Ensure it fills the viewport */
+  min-height: 100vh; /* Full height of the viewport */
+  width: 100%; /* Full width of the viewport */
+}
+
+
+/* Header */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #5680E9;
+  padding: 10px 20px;
+  color: white;
+}
+
+.profile-header h1 {
+  margin: 0;
+}
+
+.nav-bar {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-bar a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.nav-bar a.active {
+  background-color: #84CEEB;
+  border-radius: 5px;
+}
+
+/* Main Content */
+.profile-content {
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Left Section */
+.profile-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  background-color: #ddd;
+  border-radius: 50%;
+}
+
+.profile-name h2 {
+  margin: 0;
+}
+
+.profile-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-buttons .edit-button {
+  background-color: #5AB9EA;
+  color: white;
+}
+
+.profile-buttons .save-button {
+  background-color: #5AB9EA;
+  color: white;
+}
+
+/* Right Section */
+.profile-right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.skills-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.skills-section h3 {
+  margin-top: 0;
+}
+
+.skills-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.skills-section li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.skills-section li:last-child {
+  border-bottom: none;
+}
+
