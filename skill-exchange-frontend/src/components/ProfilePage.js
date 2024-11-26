@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './ProfilePage.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const ProfilePage = () => {
   const [name, setName] = useState("John Doe");
   const [isEditing, setIsEditing] = useState(false);
   const [currentSection, setCurrentSection] = useState("Profile");
+  const navigate = useNavigate(); // Initialize the navigate hook
 
   // States for skills
   const [offeredSkills, setOfferedSkills] = useState([
@@ -34,7 +36,11 @@ const ProfilePage = () => {
     const updatedSkills = offeredSkills.filter((_, i) => i !== index);
     setOfferedSkills(updatedSkills);
   };
-
+   // Logout handler
+   const handleLogout = () => {
+    // Add any logout-specific logic here if needed (e.g., clearing cookies, tokens)
+    navigate("/"); // Redirect to the homepage
+  };
   // Handlers for seeking skills
   const handleAddSeekingSkill = () => setSeekingSkills([...seekingSkills, ""]);
   const handleSeekingSkillChange = (index, value) => {
@@ -106,9 +112,9 @@ const ProfilePage = () => {
             </a>
           </li>
           <li>
-            <a
+          <a
               href="#logout"
-              onClick={() => setCurrentSection("Logout")}
+              onClick={handleLogout} // Call handleLogout on click
               className={currentSection === "Logout" ? "active" : ""}
             >
               Logout
