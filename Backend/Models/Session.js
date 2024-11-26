@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const sessionSchema = new mongoose.Schema({
     organizer:{
         type:String,
         required:true
@@ -28,6 +28,6 @@ const userSchema = new mongoose.Schema({
     }    
 });
 
-const Session = mongoose.model("Session", userSchema);
+const Session = mongoose.model("Session", sessionSchema);
 
 export default Session;
