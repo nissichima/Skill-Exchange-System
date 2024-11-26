@@ -1,5 +1,8 @@
 import React from 'react';
+import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 import './AuthPage.css';
+
 
 const AuthPage = () => {
   return (
