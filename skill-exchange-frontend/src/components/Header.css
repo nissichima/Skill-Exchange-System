@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--primary-dark);
+  color: white;
+}
+
+.header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.header ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.header ul li a:hover {
+  text-decoration: underline;
+}
+
