@@ -3,12 +3,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: var(--primary-dark);
+  background-color: #c1c8e4;
   color: white;
 }
 
 .header .logo {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
@@ -27,3 +27,23 @@
   text-decoration: underline;
 }
 
+.nav-links {
+  display: flex;
+  gap: 1.5rem; /* Add spacing between links */
+  list-style: none;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem; /* Increase size */
+  font-weight: bold;
+  padding: 0.5rem 1rem; /* Adds padding */
+  transition: transform 0.2s ease;
+}
+
+.nav-links li a:hover {
+  color: #8860d0; /* Change color on hover */
+  text-decoration: underline;
+  transform: scale(1.8); /* Slightly enlarge */
+}
