@@ -5,7 +5,9 @@ import './Header.css';
 const Header = () => {
   return (
     <header className="header">
-      <div className="logo">SkillShare</div>
+      <div className="logo">
+        <Link to="/" className="logo-link">SkillShare</Link> {/* Link to home */}
+      </div>
       <nav>
         <ul className="nav-links">
           <li><Link to="/auth" className="nav-item">Login</Link></li>

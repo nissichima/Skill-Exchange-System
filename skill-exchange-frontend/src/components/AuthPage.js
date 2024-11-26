@@ -6,13 +6,13 @@ const AuthPage = () => {
     <div className="auth-page">
       <div className="auth-container">
         {/* Login Section */}
-        <div className="login-section">
+        <div className="login-section auth-box">
           <h2>Login</h2>
           <form>
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" />
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" />
+            <label htmlFor="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="Enter your email" />
+            <label htmlFor="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="Enter your password" />
             <div className="auth-actions">
               <button type="button" className="forgot-password">Forgot My Password</button>
               <button type="submit" className="auth-button">Sign In</button>
@@ -21,15 +21,15 @@ const AuthPage = () => {
         </div>
 
         {/* Sign-Up Section */}
-        <div className="signup-section">
+        <div className="signup-section auth-box">
           <h2>Sign Up</h2>
           <form>
-            <label htmlFor="name">Name</label>
-            <input type="text" id="name" placeholder="Enter your name" />
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" />
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" placeholder="Create a password" />
+            <label htmlFor="signup-name">Name</label>
+            <input type="text" id="signup-name" placeholder="Enter your name" />
+            <label htmlFor="signup-email">Email</label>
+            <input type="email" id="signup-email" placeholder="Enter your email" />
+            <label htmlFor="signup-password">Password</label>
+            <input type="password" id="signup-password" placeholder="Create a password" />
             <button type="submit" className="auth-button">Sign Up</button>
           </form>
         </div>
@@ -39,4 +39,3 @@ const AuthPage = () => {
 };
 
 export default AuthPage;
-

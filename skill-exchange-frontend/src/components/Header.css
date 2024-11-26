@@ -11,6 +11,17 @@
   font-size: 2.5rem;
   font-weight: bold;
 }
+.logo-link {
+  text-decoration: none; /* Removes the underline */
+  color: white; /* Changes text color to white */
+  font-size: inherit; /* Keeps the same font size as the logo container */
+  font-weight: inherit; /* Inherits font weight from the parent */
+  transition: color 0.2s ease; /* Smooth color transition on hover */
+}
+
+.logo-link:hover {
+  color: #8860d0; /* Optional: Add a hover effect */
+}
 
 .header ul {
   list-style: none;
