@@ -5,6 +5,48 @@ const ProfilePage = () => {
   const [name, setName] = useState("John Doe");
   const [isEditing, setIsEditing] = useState(false);
   const [currentSection, setCurrentSection] = useState("Profile");
+
+  // States for skills
+  const [offeredSkills, setOfferedSkills] = useState([
+    "Web Development",
+    "Graphic Design",
+    "Photography",
+    "Marketing",
+  ]);
+  const [seekingSkills, setSeekingSkills] = useState([
+    "Cooking",
+    "Music",
+    "Fitness",
+    "Public Speaking",
+  ]);
+
+  const [isEditingOffered, setIsEditingOffered] = useState(false);
+  const [isEditingSeeking, setIsEditingSeeking] = useState(false);
+
+  // Handlers for offered skills
+  const handleAddOfferedSkill = () => setOfferedSkills([...offeredSkills, ""]);
+  const handleOfferedSkillChange = (index, value) => {
+    const updatedSkills = [...offeredSkills];
+    updatedSkills[index] = value;
+    setOfferedSkills(updatedSkills);
+  };
+  const handleRemoveOfferedSkill = (index) => {
+    const updatedSkills = offeredSkills.filter((_, i) => i !== index);
+    setOfferedSkills(updatedSkills);
+  };
+
+  // Handlers for seeking skills
+  const handleAddSeekingSkill = () => setSeekingSkills([...seekingSkills, ""]);
+  const handleSeekingSkillChange = (index, value) => {
+    const updatedSkills = [...seekingSkills];
+    updatedSkills[index] = value;
+    setSeekingSkills(updatedSkills);
+  };
+  const handleRemoveSeekingSkill = (index) => {
+    const updatedSkills = seekingSkills.filter((_, i) => i !== index);
+    setSeekingSkills(updatedSkills);
+  };
+
   const handleEdit = () => setIsEditing(true);
   const handleSave = () => setIsEditing(false);
 
@@ -111,22 +153,64 @@ const ProfilePage = () => {
           {/* Offered Skills */}
           <div className="skills-section">
             <h3>Offered Skills</h3>
-            <ul>
-              <li>Web Development</li>
-              <li>Graphic Design</li>
-              <li>Photography</li>
-              <li>Marketing</li>
-            </ul>
+            {isEditingOffered ? (
+              <div>
+                {offeredSkills.map((skill, index) => (
+                  <div key={index} className="skill-edit">
+                    <input
+                      type="text"
+                      value={skill}
+                      onChange={(e) =>
+                        handleOfferedSkillChange(index, e.target.value)
+                      }
+                    />
+                    <button onClick={() => handleRemoveOfferedSkill(index)}>
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                <button onClick={handleAddOfferedSkill}>Add Skill</button>
+                <button onClick={() => setIsEditingOffered(false)}>Save</button>
+              </div>
+            ) : (
+              <ul>
+                {offeredSkills.map((skill, index) => (
+                  <li key={index}>{skill}</li>
+                ))}
+                <button onClick={() => setIsEditingOffered(true)}>Edit</button>
+              </ul>
+            )}
           </div>
           {/* Seeking Skills */}
           <div className="skills-section">
             <h3>Seeking Skills</h3>
-            <ul>
-              <li>Cooking</li>
-              <li>Music</li>
-              <li>Fitness</li>
-              <li>Public Speaking</li>
-            </ul>
+            {isEditingSeeking ? (
+              <div>
+                {seekingSkills.map((skill, index) => (
+                  <div key={index} className="skill-edit">
+                    <input
+                      type="text"
+                      value={skill}
+                      onChange={(e) =>
+                        handleSeekingSkillChange(index, e.target.value)
+                      }
+                    />
+                    <button onClick={() => handleRemoveSeekingSkill(index)}>
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                <button onClick={handleAddSeekingSkill}>Add Skill</button>
+                <button onClick={() => setIsEditingSeeking(false)}>Save</button>
+              </div>
+            ) : (
+              <ul>
+                {seekingSkills.map((skill, index) => (
+                  <li key={index}>{skill}</li>
+                ))}
+                <button onClick={() => setIsEditingSeeking(true)}>Edit</button>
+              </ul>
+            )}
           </div>
         </div>
       </section>

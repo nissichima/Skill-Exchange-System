@@ -130,6 +130,9 @@
   height: 150px;
   background-color: #ddd;
   border-radius: 50%;
+  background-image: url('./user.jpg'); /* Path to your image */
+  background-size: cover; /* Ensures the image fills the circle */
+  background-position: center; /* Centers the image within the circle */
 }
 
 .profile-name h2 {
@@ -160,6 +163,60 @@
   flex-direction: column;
   gap: 20px;
   padding: 0 20px;
+}
+/* General Button Styles */
+button {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #5ab9ea; /* Light blue */
+  color: white;
+  padding: 10px 15px; /* Padding for better spacing */
+  font-size: 1rem; /* Text size */
+  font-weight: bold;
+}
+
+/* Edit Button */
+.edit-button {
+  background-color: #5ab9ea; /* Light blue */
+  color: white;
+  padding: 10px 15px; /* Padding for better spacing */
+  font-size: 1rem; /* Text size */
+  font-weight: bold;
+}
+
+.edit-button:hover {
+  background-color: #5680e9; /* Slightly darker blue on hover */
+  transform: scale(1.05); /* Slight enlargement on hover */
+}
+
+/* Save Button */
+.save-button {
+  background-color: #84ceeb; /* Light teal */
+  color: white;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 10px; /* Adds space between the "Add Skill" and "Save" buttons */
+
+}
+
+.save-button:hover {
+  background-color: #5680e9; /* Match hover effect with edit button */
+  transform: scale(1.05);
+}
+
+/* Remove Button (for skills) */
+button.remove-button {
+  background-color: #e74c3c; /* Red for remove action */
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+}
+
+button.remove-button:hover {
+  background-color: #c0392b; /* Darker red on hover */
 }
 
 .skills-section {
