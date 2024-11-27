@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const skillSchema = new mongoose.Schema({
     skillName:{
         type:String,
         required:true,
@@ -20,6 +20,6 @@ const userSchema = new mongoose.Schema({
     }    
 });
 
-const Skill = mongoose.model("Skill", userSchema);
+const Skill = mongoose.model("Skill", skillSchema);
 
 export default Skill;
