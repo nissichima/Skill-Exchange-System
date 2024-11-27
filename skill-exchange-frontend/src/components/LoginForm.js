@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { login } from '../services/authService';
 import './AuthPage.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 console.log('LoginForm component loaded');
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ loginInput: '', password: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -30,9 +33,14 @@ const LoginForm = () => {
       }
   
       const result = await response.json();
-      setSuccess(result.message); // Display success message
+      setSuccess(result.message);
+      console.log('Login successful:', result);
+
+      // Redirect to the profile page
+      navigate('/profile');
     } catch (err) {
-      setError(err.message || 'An error occurred'); // Display error message
+      setError(err.message || 'An error occurred');
+      console.error('Login error:', err.message);
     }
   };
   

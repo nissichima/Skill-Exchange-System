@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './AuthPage.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +15,7 @@ const SignupForm = () => {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,9 +40,14 @@ const SignupForm = () => {
       }
 
       const result = await response.json();
-      setSuccess(result.message); // Display success message
+      setSuccess(result.message);
+      console.log('Signup successful:', result);
+
+      // Redirect to the profile page
+      navigate('/profile');
     } catch (err) {
-      setError(err.message || 'An error occurred'); // Display error message
+      setError(err.message || 'An error occurred');
+      console.error('Signup error:', err.message);
     }
   };
 
