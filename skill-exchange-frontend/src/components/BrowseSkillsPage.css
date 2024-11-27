@@ -1,81 +1,66 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(45deg, #84ceeb, #c1c8e4, #8860d0);
+  color: white;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a.active-link {
+  border-bottom: 2px solid #5ab9ea;
+}
+
 .browse-skills-page {
-    padding: 2rem;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 2rem;
-    background-color: #5AB9EA;
-    padding: 1rem;
-    border-radius: 10px;
-  }
-  
-  .navbar a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .navbar a:hover {
-    text-decoration: underline;
-  }
-  
-  .search-bar-container {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .search-bar-container input,
-  .search-bar-container select,
-  .search-bar-container button {
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .search-bar-container button {
-    background-color: #5AB9EA;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .search-bar-container button:hover {
-    background-color: #84CEEB;
-  }
-  
-  .skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
-  
-  .skill-card {
-    width: 250px;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .skill-card h2 {
-    margin-bottom: 0.5rem;
-  }
-  
-  .error {
-    color: red;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
+  text-align: center;
+  padding: 2rem;
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.search-bar-container input,
+.search-bar-container select {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.skill-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+.error {
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
