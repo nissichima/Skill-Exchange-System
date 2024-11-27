@@ -1,29 +1,44 @@
-import transporter from '../DB/mailer.js';  // This imports sgMail from mailer.js
+import { sgMail, fromEmail } from '../DB/mailer.js';  // Import sgMail and the 'from' email from mailer.js
+import Session from '../Models/session.model.js';  // Import Session model
+import User from '../models/user.model.js';  // Import User model
 
-const sendSessionNotifications = async (organizerEmail, participantEmail) => {
+const sendSessionNotifications = async (sessionDetails) => {
+  const { organizer, participant, skill, dateTime, duration, locationType } = sessionDetails;
+
   try {
-    const msg = {
-      to: participantEmail,  // Send to participant
-      from: 'your-email@example.com',  // Your email (set it to the sender's address)
-      subject: 'Session Scheduled',
-      text: 'You have a session scheduled. Please check your organizer.',
-    };
+    // Fetch organizer and participant emails from the User database
+    const organizerUser = await User.findOne({ username: organizer });
+    const participantUser = await User.findOne({ username: participant });
+
+    if (!organizerUser || !participantUser) {
+      throw new Error('Organizer or participant not found in the database');
+    }
+
+    const organizerEmail = organizerUser.email;
+    const participantEmail = participantUser.email;
 
     // Send email to participant
-    await transporter.send(msg);  // This sends the email using SendGrid's send() method
+    const participantMsg = {
+      to: participantEmail,
+      from: fromEmail,  // From email from mailer.js
+      subject: 'Session Scheduled',
+      text: `You have a session scheduled with ${organizerUser.firstName} ${organizerUser.lastName} on ${skill}.\n\nDetails:\nDate and Time: ${dateTime}\nDuration: ${duration} hours\nLocation: ${locationType}`,
+    };
+    await sgMail.send(participantMsg);
 
     // Send email to organizer for confirmation
     const organizerMsg = {
       to: organizerEmail,
-      from: 'your-email@example.com',
+      from: fromEmail,  // From email from mailer.js
       subject: 'Session Confirmation',
-      text: 'You have successfully scheduled a session with a participant.',
+      text: `You have successfully scheduled a session with ${participantUser.firstName} ${participantUser.lastName} on ${skill}.\n\nDetails:\nDate and Time: ${dateTime}\nDuration: ${duration} hours\nLocation: ${locationType}`,
     };
-    await transporter.send(organizerMsg);  // Send email to organizer
-    
+    await sgMail.send(organizerMsg);
+
     console.log('Emails sent successfully');
+    console.log('Session details saved to the database');
   } catch (error) {
-    console.error('Error sending emails:', error);
+    console.error('Error processing session notifications or saving session:', error);
   }
 };
 

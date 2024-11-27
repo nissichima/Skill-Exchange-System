@@ -2,11 +2,17 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv';
 
-import connectToDB from './DB/DBConnect.js'
-import authRoutes from "./Routes/auth.routes.js"
-import messageRoutes from "./Routes/message.routes.js"
+import connectToDB from './DB/DBConnect.js';
+import authRoutes from "./Routes/auth.routes.js";
+import messageRoutes from "./Routes/message.routes.js";
 import sessionRoutes from "./Routes/session.routes.js";
+<<<<<<< HEAD
 import cors from 'cors';
+=======
+import skillRoutes from "./Routes/skill.routes.js";
+import profileRoutes from "./Routes/profile.routes.js";
+
+>>>>>>> 21edee57af83582a9283f715f742b968f6becf15
 
 dotenv.config();
 
@@ -25,6 +31,8 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes)
 app.use("/api/messages", messageRoutes)
 app.use("/api/sessions", sessionRoutes);
+app.use("/api/skills", skillRoutes);
+app.use("/api/profile", profileRoutes);
 
 
 app.get("/", (req, res) =>{

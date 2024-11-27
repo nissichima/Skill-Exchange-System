@@ -16,9 +16,6 @@ const checkId = async(req, res, next) => {
 
         const user = await User.findById(decoded.userId).select("-password");
 
-        console.log("token: ", token)
-        console.log("decoded: ", decoded)
-        console.log("user Id: ", decoded.userId)
         if (!user){
             return res.status(404).json({error: "User not found"})
         }
