@@ -7,6 +7,7 @@ import authRoutes from "./Routes/auth.routes.js";
 import messageRoutes from "./Routes/message.routes.js";
 import sessionRoutes from "./Routes/session.routes.js";
 import skillRoutes from "./Routes/skill.routes.js";
+import skillRoutes from "./Routes/profile.routes.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/messages", messageRoutes)
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/skills", skillRoutes);
+app.use("/api/profile", profileRoutes);
 
 
 app.get("/", (req, res) =>{
