@@ -7,7 +7,8 @@ import authRoutes from "./Routes/auth.routes.js";
 import messageRoutes from "./Routes/message.routes.js";
 import sessionRoutes from "./Routes/session.routes.js";
 import skillRoutes from "./Routes/skill.routes.js";
-import skillRoutes from "./Routes/profile.routes.js";
+import profileRoutes from "./Routes/profile.routes.js";
+
 
 dotenv.config();
 
