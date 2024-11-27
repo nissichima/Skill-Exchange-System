@@ -1,6 +1,7 @@
 import generateToken from '../GenerateToken.js';
 import User from '../Models/user.model.js'
 import bcrypt from "bcryptjs"
+import { sgMail, fromEmail } from '../DB/mailer.js'; // Email service
 
 export const signup = async(req, res) =>{
     try {

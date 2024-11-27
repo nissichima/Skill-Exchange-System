@@ -6,13 +6,11 @@ import connectToDB from './DB/DBConnect.js';
 import authRoutes from "./Routes/auth.routes.js";
 import messageRoutes from "./Routes/message.routes.js";
 import sessionRoutes from "./Routes/session.routes.js";
-<<<<<<< HEAD
 import cors from 'cors';
-=======
 import skillRoutes from "./Routes/skill.routes.js";
 import profileRoutes from "./Routes/profile.routes.js";
 
->>>>>>> 21edee57af83582a9283f715f742b968f6becf15
+
 
 dotenv.config();
 

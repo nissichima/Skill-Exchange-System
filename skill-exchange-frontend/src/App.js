@@ -17,6 +17,9 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/" element={<ProfilePage />} /> {/* Home or Profile Page */}
+        
+
       </Routes>
     </div>
   );

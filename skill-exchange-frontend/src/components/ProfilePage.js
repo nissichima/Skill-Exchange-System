@@ -1,56 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './ProfilePage.css';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const ProfilePage = () => {
   const [name, setName] = useState("John Doe");
   const [isEditing, setIsEditing] = useState(false);
   const [currentSection, setCurrentSection] = useState("Profile");
-  const navigate = useNavigate();
 
   // States for skills
-  const [offeredSkills, setOfferedSkills] = useState([]);
-  const [seekingSkills, setSeekingSkills] = useState([]);
+  const [offeredSkills, setOfferedSkills] = useState([
+    "Web Development",
+    "Graphic Design",
+    "Photography",
+    "Marketing",
+  ]);
+  const [seekingSkills, setSeekingSkills] = useState([
+    "Cooking",
+    "Music",
+    "Fitness",
+    "Public Speaking",
+  ]);
 
   const [isEditingOffered, setIsEditingOffered] = useState(false);
   const [isEditingSeeking, setIsEditingSeeking] = useState(false);
-
-  // Fetch user data on page load
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get('/api/users/profile', { withCredentials: true });
-        setName(`${response.data.firstName} ${response.data.lastName}`);
-        setOfferedSkills(response.data.offeredSkills || []);
-        setSeekingSkills(response.data.seekedSkills || []);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  // Save updated skills to the backend
-  const saveSkills = async () => {
-    try {
-      await axios.put(
-        '/api/users/profile',
-        { offeredSkills, seekedSkills: seekingSkills },
-        { withCredentials: true }
-      );
-      alert('Skills updated successfully!');
-    } catch (error) {
-      console.error('Error updating skills:', error);
-      alert('Failed to update skills.');
-    }
-  };
-
-  // Logout handler
-  const handleLogout = () => {
-    navigate("/");
-  };
 
   // Handlers for offered skills
   const handleAddOfferedSkill = () => setOfferedSkills([...offeredSkills, ""]);
@@ -75,6 +46,9 @@ const ProfilePage = () => {
     const updatedSkills = seekingSkills.filter((_, i) => i !== index);
     setSeekingSkills(updatedSkills);
   };
+
+  const handleEdit = () => setIsEditing(true);
+  const handleSave = () => setIsEditing(false);
 
   return (
     <main className="profile-page">
@@ -132,7 +106,11 @@ const ProfilePage = () => {
             </a>
           </li>
           <li>
-            <a href="#logout" onClick={handleLogout}>
+            <a
+              href="#logout"
+              onClick={() => setCurrentSection("Logout")}
+              className={currentSection === "Logout" ? "active" : ""}
+            >
               Logout
             </a>
           </li>
@@ -141,14 +119,38 @@ const ProfilePage = () => {
 
       {/* Main Profile Section */}
       <section className="profile-content">
+        {/* Left Section - Profile Picture & Name */}
         <div className="profile-left">
-          <div className="profile-picture"></div>
+          <div className="profile-picture">
+            {/* Placeholder for profile image */}
+          </div>
           <div className="profile-name">
-            <h2>{name}</h2>
+            {isEditing ? (
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            ) : (
+              <h2>{name}</h2>
+            )}
+          </div>
+          <div className="profile-buttons">
+            {isEditing ? (
+              <button onClick={handleSave} className="save-button">
+                Save
+              </button>
+            ) : (
+              <button onClick={handleEdit} className="edit-button">
+                Edit
+              </button>
+            )}
           </div>
         </div>
 
+        {/* Right Section - Offered and Seeking Skills */}
         <div className="profile-right">
+          {/* Offered Skills */}
           <div className="skills-section">
             <h3>Offered Skills</h3>
             {isEditingOffered ? (
@@ -158,13 +160,17 @@ const ProfilePage = () => {
                     <input
                       type="text"
                       value={skill}
-                      onChange={(e) => handleOfferedSkillChange(index, e.target.value)}
+                      onChange={(e) =>
+                        handleOfferedSkillChange(index, e.target.value)
+                      }
                     />
-                    <button onClick={() => handleRemoveOfferedSkill(index)}>Remove</button>
+                    <button onClick={() => handleRemoveOfferedSkill(index)}>
+                      Remove
+                    </button>
                   </div>
                 ))}
                 <button onClick={handleAddOfferedSkill}>Add Skill</button>
-                <button onClick={() => { saveSkills(); setIsEditingOffered(false); }}>Save</button>
+                <button onClick={() => setIsEditingOffered(false)}>Save</button>
               </div>
             ) : (
               <ul>
@@ -175,6 +181,7 @@ const ProfilePage = () => {
               </ul>
             )}
           </div>
+          {/* Seeking Skills */}
           <div className="skills-section">
             <h3>Seeking Skills</h3>
             {isEditingSeeking ? (
@@ -184,13 +191,17 @@ const ProfilePage = () => {
                     <input
                       type="text"
                       value={skill}
-                      onChange={(e) => handleSeekingSkillChange(index, e.target.value)}
+                      onChange={(e) =>
+                        handleSeekingSkillChange(index, e.target.value)
+                      }
                     />
-                    <button onClick={() => handleRemoveSeekingSkill(index)}>Remove</button>
+                    <button onClick={() => handleRemoveSeekingSkill(index)}>
+                      Remove
+                    </button>
                   </div>
                 ))}
                 <button onClick={handleAddSeekingSkill}>Add Skill</button>
-                <button onClick={() => { saveSkills(); setIsEditingSeeking(false); }}>Save</button>
+                <button onClick={() => setIsEditingSeeking(false)}>Save</button>
               </div>
             ) : (
               <ul>
