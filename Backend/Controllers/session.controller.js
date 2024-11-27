@@ -1,4 +1,4 @@
-import Session from "../models/Session.js";
+import Session from "../Models/session.model.js";
 import { sendSessionNotifications } from "../Services/emailService.js";
 
 export const createSession = async (req, res) => {
