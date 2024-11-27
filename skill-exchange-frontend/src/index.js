@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+// Enable cookies to be sent automatically with every Axios request
+axios.defaults.withCredentials = true;
 
+// Optional: Set the base URL for your backend API
+axios.defaults.baseURL = "http://localhost:5000/api";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

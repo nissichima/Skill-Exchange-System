@@ -12,6 +12,7 @@ const Header = () => {
         <ul className="nav-links">
           <li><Link to="/auth" className="nav-item">Login</Link></li>
           <li><Link to="/auth" className="nav-item">Sign Up</Link></li>
+          <li><Link to="/browse" className= "nav-item">Browse Skills</Link></li> {/* Link to Browse Skills Page */}
         </ul>
       </nav>
     </header>
