@@ -27,7 +27,15 @@ const userSchema = new mongoose.Schema({
         type:String,
         required: true,
         enum:["male", "female"]
-    }
+    },
+    seekedSkills:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skill"
+    }],
+    offeredSkills:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skill"
+    }]
 },
 {timestamps:true});
 
