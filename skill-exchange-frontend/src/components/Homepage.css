@@ -115,7 +115,7 @@ h2 {
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 6s infinite linear;
+  animation: shine 4s infinite linear;
 }
 
 /* Keyframes for the shine effect */
@@ -134,7 +134,7 @@ h2 {
 /* Introduction text */
 p.intro-text {
   font-size: 1.4rem;
-  margin-top: 10px;
+  margin-top: 5px;
   color: #ffffff;
   max-width: 800px;
 }
