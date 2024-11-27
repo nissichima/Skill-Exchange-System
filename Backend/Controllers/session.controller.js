@@ -1,6 +1,9 @@
 import Session from "../Models/session.model.js";
 import { sendSessionNotifications } from "../Services/emailService.js";
 
+export const fetchSession = async (req, res) => {
+
+};
 export const createSession = async (req, res) => {
   const { organizer, participant, skill, dateTime, duration, locationType} = req.body;
 

@@ -1,9 +1,10 @@
 import express from "express";
-import { createSession } from "../Controllers/session.controller.js";
+import { fetchSession, createSession } from "../Controllers/session.controller.js";
 
 const router = express.Router();
 
 // Route to create a session
-router.post("/", createSession);
+router.post("/", fetchSession);
+router.post("/create", createSession);
 
 export default router;
