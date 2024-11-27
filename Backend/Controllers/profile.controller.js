@@ -6,9 +6,9 @@ export const updateProfile = async(req, res) =>{
         const updatedData = req.body; 
     
         const updatedUser = await User.findByIdAndUpdate(
-        userId,                
-        { $set: updatedData }, 
-        { new: true, runValidators: true }
+            userId,                
+            { $set: updatedData }, 
+            { new: true, runValidators: true }
         );
     
         if (updatedUser) {
