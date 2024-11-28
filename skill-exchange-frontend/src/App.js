@@ -21,7 +21,7 @@ function App() {
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/browse" element={<BrowseSkillsPage />} /> {/* New Route for Browse Skills */}
-        <Route path= "/message" element={<MessagesPage />} /> {/*New Route for Messages */}
+        <Route path= "/messages" element={<MessagesPage />} /> {/*New Route for Messages */}
         <Route path= "/history" element={<HistoryPage />} />
 
       </Routes>
