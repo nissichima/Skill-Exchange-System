@@ -1,46 +1,37 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./BrowseSkillsPage.css";
 
 const BrowseSkillsPage = () => {
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState([
+    { id: "1", skillName: "Web Development", category: "Technology", details: "Learn to code websites" },
+    { id: "2", skillName: "Photography", category: "Art", details: "Master the art of photography" },
+    { id: "3", skillName: "Cooking", category: "Cooking", details: "Learn to cook delicious meals" },
+  ]);
   const [filters, setFilters] = useState({ skillName: "", category: "" });
-  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  // Fetch skills when the page loads or filters change
   useEffect(() => {
-    const fetchSkills = async () => {
-      try {
-        const { data } = await axios.get("/api/skills/find", { params: filters });
-        if (data.skills.length === 0) {
-          setErrorMessage("No skills found matching the criteria.");
-        } else {
-          setSkills(data.skills);
-          setErrorMessage("");
-        }
-      } catch (error) {
-        console.error("Error fetching skills:", error);
-        setErrorMessage("Failed to load skills. Please try again.");
-      }
-    };
-
-    fetchSkills();
+    // Simulate filtering logic for skills
+    const filteredSkills = skills.filter((skill) => {
+      const matchesSkillName = filters.skillName
+        ? skill.skillName.toLowerCase().includes(filters.skillName.toLowerCase())
+        : true;
+      const matchesCategory = filters.category
+        ? skill.category === filters.category
+        : true;
+      return matchesSkillName && matchesCategory;
+    });
+    setSkills(filteredSkills);
   }, [filters]);
 
-  // Handle search term input
-  const handleSearchChange = (e) => {
-    setFilters({ ...filters, skillName: e.target.value });
-  };
-
-  // Handle category filter change
-  const handleCategoryChange = (e) => {
-    setFilters({ ...filters, category: e.target.value });
+  const handleFilterChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
   return (
     <div className="browse-skills-page">
+      {/* Navigation Bar */}
       <header className="navbar">
         <NavLink to="/browse" activeClassName="active-link">
           Browse Skills
@@ -60,29 +51,27 @@ const BrowseSkillsPage = () => {
         <button onClick={() => navigate("/logout")}>Logout</button>
       </header>
 
+      {/* Page Content */}
       <main>
         <h1>Browse Skills</h1>
         <div className="search-bar-container">
           <input
             type="text"
             placeholder="Search by skill name..."
-            value={filters.skillName}
-            onChange={handleSearchChange}
+            name="skillName"
+            onChange={handleFilterChange}
           />
-          <select name="category" value={filters.category} onChange={handleCategoryChange}>
+          <select name="category" onChange={handleFilterChange}>
             <option value="">All Categories</option>
             <option value="Technology">Technology</option>
             <option value="Art">Art</option>
             <option value="Cooking">Cooking</option>
-            <option value="Music">Music</option>
           </select>
         </div>
 
-        {errorMessage && <div className="error">{errorMessage}</div>}
-
         <div className="skills-container">
           {skills.map((skill) => (
-            <div key={skill._id} className="skill-card">
+            <div key={skill.id} className="skill-card">
               <h2>{skill.skillName}</h2>
               <p><strong>Category:</strong> {skill.category}</p>
               <p>{skill.details}</p>
