@@ -15,7 +15,7 @@ const MessagesPage = () => {
     // Fetch recipients from the backend
     const fetchRecipients = async () => {
       try {
-        const response = await axios.get("/api/message/recipients");
+        const response = await axios.get("http://localhost:5001/api/message/recipients");
         setRecipients(response.data);
       } catch (err) {
         console.error("Error fetching recipients:", err);
