@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Messages.css";
+import "./MessagesPage.css";
 
 const Messages = () => {
   const [recipients, setRecipients] = useState([]);
