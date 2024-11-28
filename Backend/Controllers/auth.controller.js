@@ -110,7 +110,7 @@ export const requestPasswordReset = async (req, res) => {
       await user.save();
   
       // Send email with reset link
-      const resetLink = `http://localhost:5000/password-reset/${resetToken}`;
+      const resetLink = `http://localhost:5000/api/auth/password-reset/${resetToken}`;
       const msg = {
         to: user.email,
         from: fromEmail,
