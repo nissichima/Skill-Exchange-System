@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate for redire
 import './ProfilePage.css';
 
 const ProfilePage = () => {
-  const [name, setName] = useState("John Doe");
+  const [name, setName] = useState(" ");
   const [isEditing, setIsEditing] = useState(false);
   const [currentSection, setCurrentSection] = useState("Profile");
 

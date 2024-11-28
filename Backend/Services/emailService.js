@@ -1,6 +1,6 @@
 import { sgMail, fromEmail } from '../DB/mailer.js';  // Import sgMail and the 'from' email from mailer.js
 import Session from '../Models/session.model.js';  // Import Session model
-import User from '../models/user.model.js';  // Import User model
+import User from '../Models/user.model.js';  // Import User model
 
 const sendSessionNotifications = async (sessionDetails) => {
   const { organizer, participant, skill, dateTime, duration, locationType } = sessionDetails;

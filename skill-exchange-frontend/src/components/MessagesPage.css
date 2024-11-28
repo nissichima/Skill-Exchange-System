@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: space-around;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: #5AB9EA;
 }
 
 .navbar a {

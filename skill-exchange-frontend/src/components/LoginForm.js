@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { login } from '../services/authService';
-import './AuthPage.css';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-console.log('LoginForm component loaded');
+import './AuthPage.css';
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ loginInput: '', password: '' });
@@ -36,14 +34,18 @@ const LoginForm = () => {
       setSuccess(result.message);
       console.log('Login successful:', result);
 
-      // Redirect to the profile page
+      // Redirect to the profile page after successful login
       navigate('/profile');
     } catch (err) {
       setError(err.message || 'An error occurred');
       console.error('Login error:', err.message);
     }
   };
-  
+
+  // Navigate to the Forgot Password page
+  const navigateToForgotPassword = () => {
+    navigate('/forgot-password');  // Navigate to Forgot Password page
+  };
 
   return (
     <div className="login-section auth-box">
@@ -52,13 +54,31 @@ const LoginForm = () => {
       {success && <p className="success">{success}</p>}
       <form onSubmit={handleSubmit}>
         <label>Username or Email</label>
-        <input name="loginInput" type="text" placeholder="Username or Email" onChange={handleChange} required />
+        <input 
+          name="loginInput" 
+          type="text" 
+          placeholder="Username or Email" 
+          onChange={handleChange} 
+          required 
+        />
         <label>Password</label>
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
+        <input 
+          name="password" 
+          type="password" 
+          placeholder="Password" 
+          onChange={handleChange} 
+          required 
+        />
         <div className="auth-actions">
-              <button type="button" className="forgot-password">Forgot My Password</button>
-              <button type="submit" className="auth-button">Sign In</button>
-            </div>
+          <button 
+            type="button" 
+            className="forgot-password" 
+            onClick={navigateToForgotPassword} // Trigger Forgot Password navigation
+          >
+            Forgot My Password
+          </button>
+          <button type="submit" className="auth-button">Sign In</button>
+        </div>
       </form>
     </div>
   );
