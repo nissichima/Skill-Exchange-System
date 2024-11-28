@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+
 import './ProfilePage.css';
 
 const ProfilePage = () => {
@@ -22,6 +24,7 @@ const ProfilePage = () => {
 
   const [isEditingOffered, setIsEditingOffered] = useState(false);
   const [isEditingSeeking, setIsEditingSeeking] = useState(false);
+  const navigate = useNavigate(); // Initialize the navigate hook
 
   // Handlers for offered skills
   const handleAddOfferedSkill = () => setOfferedSkills([...offeredSkills, ""]);
@@ -34,6 +37,28 @@ const ProfilePage = () => {
     const updatedSkills = offeredSkills.filter((_, i) => i !== index);
     setOfferedSkills(updatedSkills);
   };
+    // Handle logout
+    const handleLogout = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/auth/logout', {
+          method: 'POST',
+          credentials: 'include', // Send cookies with the request
+        });
+        
+        if (!response.ok) {
+          throw new Error('Logout failed');
+        }
+  
+        // Clear local storage or cookies if needed
+        localStorage.removeItem('authToken'); // Example, if you're using localStorage for the JWT
+  
+        // Redirect to the homepage or login page
+        navigate('/'); // Or '/login' depending on where you want to redirect
+  
+      } catch (error) {
+        console.error('Error during logout:', error.message);
+      }
+    };
 
   // Handlers for seeking skills
   const handleAddSeekingSkill = () => setSeekingSkills([...seekingSkills, ""]);
@@ -49,7 +74,10 @@ const ProfilePage = () => {
 
   const handleEdit = () => setIsEditing(true);
   const handleSave = () => setIsEditing(false);
-
+  // Handlers for navigation
+  const navigateToHistory = () => navigate('/history');
+  const navigateToMessages = () => navigate('/message');
+  const navigateToBrowseSkills = () => navigate('/browse');
   return (
     <main className="profile-page">
       {/* Header */}
@@ -61,9 +89,9 @@ const ProfilePage = () => {
         </div>
         <ul className="nav-links">
           <li>
-            <a
+          <a
               href="#browse-skills"
-              onClick={() => setCurrentSection("Browse Skills")}
+              onClick={navigateToBrowseSkills} // Navigate to Browse Skills page
               className={currentSection === "Browse Skills" ? "active" : ""}
             >
               Browse Skills
@@ -79,18 +107,18 @@ const ProfilePage = () => {
             </a>
           </li>
           <li>
-            <a
+          <a
               href="#history"
-              onClick={() => setCurrentSection("History")}
+              onClick={navigateToHistory} // Navigate to History page
               className={currentSection === "History" ? "active" : ""}
             >
               History
             </a>
           </li>
           <li>
-            <a
+          <a
               href="#messages"
-              onClick={() => setCurrentSection("Messages")}
+              onClick={navigateToMessages} // Navigate to Messages page
               className={currentSection === "Messages" ? "active" : ""}
             >
               Messages
@@ -108,7 +136,7 @@ const ProfilePage = () => {
           <li>
             <a
               href="#logout"
-              onClick={() => setCurrentSection("Logout")}
+              onClick={handleLogout} // Call handleLogout on click
               className={currentSection === "Logout" ? "active" : ""}
             >
               Logout
