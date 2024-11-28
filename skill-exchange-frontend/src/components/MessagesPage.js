@@ -11,8 +11,8 @@ const MessagesPage = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Fetch recipients from the backend
   useEffect(() => {
-    // Fetch recipients from the backend
     const fetchRecipients = async () => {
       try {
         const response = await axios.get("http://localhost:5001/api/message/recipients");
@@ -26,12 +26,13 @@ const MessagesPage = () => {
     fetchRecipients();
   }, []);
 
+  // Handle recipient selection
   const handleRecipientSelect = async (recipient) => {
     setSelectedRecipient(recipient);
     setMessages([]); // Clear previous messages when switching recipient
 
     try {
-      const response = await axios.get(`/api/message/${recipient.id}`);
+      const response = await axios.get(`http://localhost:5001/api/message/${recipient.id}`);
       setMessages(response.data);
     } catch (err) {
       console.error("Error fetching messages:", err);
@@ -39,11 +40,12 @@ const MessagesPage = () => {
     }
   };
 
+  // Handle sending a new message
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
 
     try {
-      await axios.post(`/api/message/send/${selectedRecipient.id}`, {
+      await axios.post(`http://localhost:5001/api/message/send/${selectedRecipient.id}`, {
         message: newMessage,
       });
       setMessages([...messages, { sender: "You", text: newMessage }]);
@@ -54,7 +56,7 @@ const MessagesPage = () => {
     }
   };
 
-  // Navigation Handlers
+  // Navigation handlers
   const navigateToBrowse = () => navigate("/browse");
   const navigateToSetupSession = () => navigate("/setup-session");
   const navigateToHistory = () => navigate("/history");
@@ -68,11 +70,7 @@ const MessagesPage = () => {
         <a href="#browse-skills" onClick={navigateToBrowse} className="nav-link">
           Browse Skills
         </a>
-        <a
-          href="#setup-session"
-          onClick={navigateToSetupSession}
-          className="nav-link"
-        >
+        <a href="#setup-session" onClick={navigateToSetupSession} className="nav-link">
           Set Up Session
         </a>
         <a href="#history" onClick={navigateToHistory} className="nav-link">
