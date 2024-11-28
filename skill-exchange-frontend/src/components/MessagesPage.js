@@ -16,7 +16,10 @@ const MessagesPage = () => {
     const fetchRecipients = async () => {
       try {
         const response = await axios.get("http://localhost:5001/api/messages/recipients");
-        setRecipients(response.data);
+        setRecipientssetRecipients([
+          { id: 1, name: "John Doe" },
+          { id: 2, name: "Jane Smith" }
+        ]);
       } catch (err) {
         console.error("Error fetching recipients:", err);
         setError("Failed to load recipients. Please try again.");
