@@ -1,6 +1,8 @@
 import generateToken from '../GenerateToken.js';
 import User from '../Models/user.model.js'
 import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken";
+import { sgMail, fromEmail } from '../DB/mailer.js';
 
 export const signup = async(req, res) =>{
     try {
@@ -89,4 +91,69 @@ export const logout = async(req, res) =>{
         res.status(500).json({error:"Internal server error"});
     }
 }
+
+export const requestPasswordReset = async (req, res) => {
+    const { email } = req.body;
+  
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+  
+      // Generate a reset token (valid for 1 hour)
+      const resetToken = jwt.sign({ id: user._id }, "168e2bad30a3957a9761be7313c2e4496142cfee0f71302e80e114b8ca5cef4e", { expiresIn: "1h" });
+  
+      // Save the reset token and expiration to the user document
+      user.resetToken = resetToken;
+      user.resetTokenExpiration = Date.now() + 3600000; // 1 hour from now
+      await user.save();
+  
+      // Send email with reset link
+      const resetLink = `http://localhost:5000/password-reset/${resetToken}`;
+      const msg = {
+        to: user.email,
+        from: fromEmail,
+        subject: "Password Reset Request",
+        text: `Click the link to reset your password: ${resetLink}`,
+        html: `<p>Click <a href="${resetLink}">here</a> to reset your password.</p>`,
+      };
+  
+      await sgMail.send(msg);
+  
+      res.status(200).json({ message: "Password reset email sent" });
+    } catch (error) {
+      console.log("Error in requestPasswordReset:", error.message);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
+
+  export const resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+  
+    try {
+      // Verify the reset token
+      const decoded = jwt.verify(token, "168e2bad30a3957a9761be7313c2e4496142cfee0f71302e80e114b8ca5cef4e");
+      const user = await User.findOne({
+        _id: decoded.id,
+        resetToken: token,
+        resetTokenExpiration: { $gt: Date.now() },
+      });
+  
+      if (!user) {
+        return res.status(400).json({ error: "Invalid or expired reset token" });
+      }
+      
+      user.password = newPassword;  
+      user.resetToken = undefined;
+      user.resetTokenExpiration = undefined;
+      await user.save();
+  
+      res.status(200).json({ message: "Password successfully updated" });
+    } catch (error) {
+      console.log("Error in resetPassword:", error.message);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
 
