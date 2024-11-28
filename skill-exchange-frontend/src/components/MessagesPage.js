@@ -46,7 +46,7 @@ const MessagesPage = () => {
 
     try {
       await axios.post(`http://localhost:5001/api/messages/send/${selectedRecipient.id}`, {
-        message: newMessage,
+        messages: newMessage,
       });
       setMessages([...messages, { sender: "You", text: newMessage }]);
       setNewMessage("");
@@ -116,7 +116,7 @@ const MessagesPage = () => {
                 {messages.map((msg, index) => (
                   <div
                     key={index}
-                    className={`message ${
+                    className={`messages ${
                       msg.sender === "You" ? "sent" : "received"
                     }`}
                   >
