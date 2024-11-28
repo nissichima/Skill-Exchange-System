@@ -15,7 +15,7 @@ const MessagesPage = () => {
   useEffect(() => {
     const fetchRecipients = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/message/recipients");
+        const response = await axios.get("http://localhost:5001/api/messages/recipients");
         setRecipients(response.data);
       } catch (err) {
         console.error("Error fetching recipients:", err);
@@ -32,7 +32,7 @@ const MessagesPage = () => {
     setMessages([]); // Clear previous messages when switching recipient
 
     try {
-      const response = await axios.get(`http://localhost:5001/api/message/${recipient.id}`);
+      const response = await axios.get(`http://localhost:5001/api/messages/${recipient.id}`);
       setMessages(response.data);
     } catch (err) {
       console.error("Error fetching messages:", err);
@@ -45,7 +45,7 @@ const MessagesPage = () => {
     if (!newMessage.trim()) return;
 
     try {
-      await axios.post(`http://localhost:5001/api/message/send/${selectedRecipient.id}`, {
+      await axios.post(`http://localhost:5001/api/messages/send/${selectedRecipient.id}`, {
         message: newMessage,
       });
       setMessages([...messages, { sender: "You", text: newMessage }]);
