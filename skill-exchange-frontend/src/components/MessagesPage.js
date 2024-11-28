@@ -1,34 +1,57 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Messages.css";
 
 const Messages = () => {
-  const [recipients, setRecipients] = useState([
-    { id: "1", name: "User1" },
-    { id: "2", name: "User2" },
-    { id: "3", name: "User3" },
-  ]);
+  const [recipients, setRecipients] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (selectedRecipient) {
-      // Mock fetching messages for a selected recipient
-      const mockMessages = [
-        { sender: "User1", text: "Hello!" },
-        { sender: "You", text: "Hi there!" },
-        { sender: "User1", text: "How are you?" },
-      ];
-      setMessages(mockMessages);
-    }
-  }, [selectedRecipient]);
+    // Fetch recipients from the backend
+    const fetchRecipients = async () => {
+      try {
+        const response = await axios.get("/api/message/recipients");
+        setRecipients(response.data);
+      } catch (err) {
+        console.error("Error fetching recipients:", err);
+        setError("Failed to load recipients. Please try again.");
+      }
+    };
 
-  const handleSendMessage = () => {
+    fetchRecipients();
+  }, []);
+
+  const handleRecipientSelect = async (recipient) => {
+    setSelectedRecipient(recipient);
+    setMessages([]); // Clear previous messages when switching recipient
+
+    try {
+      const response = await axios.get(`/api/message/${recipient.id}`);
+      setMessages(response.data);
+    } catch (err) {
+      console.error("Error fetching messages:", err);
+      setError("Failed to load messages for the selected recipient.");
+    }
+  };
+
+  const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
-    setMessages([...messages, { sender: "You", text: newMessage }]);
-    setNewMessage("");
+
+    try {
+      await axios.post(`/api/message/send/${selectedRecipient.id}`, {
+        message: newMessage,
+      });
+      setMessages([...messages, { sender: "You", text: newMessage }]);
+      setNewMessage("");
+    } catch (err) {
+      console.error("Error sending message:", err);
+      setError("Failed to send message. Please try again.");
+    }
   };
 
   return (
@@ -58,17 +81,22 @@ const Messages = () => {
         {/* Recipient List */}
         <div className="recipients-list">
           <h3>List of Recipients</h3>
-          {recipients.map((recipient) => (
-            <div
-              key={recipient.id}
-              className={`recipient ${
-                selectedRecipient?.id === recipient.id ? "selected" : ""
-              }`}
-              onClick={() => setSelectedRecipient(recipient)}
-            >
-              {recipient.name}
-            </div>
-          ))}
+          {error && <div className="error">{error}</div>}
+          {recipients.length > 0 ? (
+            recipients.map((recipient, index) => (
+              <div
+                key={index}
+                className={`recipient ${
+                  selectedRecipient?.id === recipient.id ? "selected" : ""
+                }`}
+                onClick={() => handleRecipientSelect(recipient)}
+              >
+                {recipient.name}
+              </div>
+            ))
+          ) : (
+            <p>No recipients available.</p>
+          )}
         </div>
 
         {/* Chat Container */}
