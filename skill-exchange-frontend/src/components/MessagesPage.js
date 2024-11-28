@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./MessagesPage.css";
 
@@ -54,26 +54,36 @@ const Messages = () => {
     }
   };
 
+  // Navigation Handlers
+  const navigateToBrowse = () => navigate("/browse");
+  const navigateToSetupSession = () => navigate("/setup-session");
+  const navigateToHistory = () => navigate("/history");
+  const navigateToMessages = () => navigate("/messages");
+  const navigateToProfile = () => navigate("/profile");
+
   return (
     <div className="messages-page">
       {/* Navigation Bar */}
       <header className="navbar">
-        <NavLink to="/browse" activeClassName="active-link">
+        <a href="#browse-skills" onClick={navigateToBrowse} className="nav-link">
           Browse Skills
-        </NavLink>
-        <NavLink to="/setup-session" activeClassName="active-link">
+        </a>
+        <a
+          href="#setup-session"
+          onClick={navigateToSetupSession}
+          className="nav-link"
+        >
           Set Up Session
-        </NavLink>
-        <NavLink to="/history" activeClassName="active-link">
+        </a>
+        <a href="#history" onClick={navigateToHistory} className="nav-link">
           History
-        </NavLink>
-        <NavLink to="/messages" activeClassName="active-link">
+        </a>
+        <a href="#messages" onClick={navigateToMessages} className="nav-link">
           Messages
-        </NavLink>
-        <NavLink to="/profile" activeClassName="active-link">
+        </a>
+        <a href="#profile" onClick={navigateToProfile} className="nav-link">
           Profile
-        </NavLink>
-        <button onClick={() => navigate("/logout")}>Logout</button>
+        </a>
       </header>
 
       {/* Main Content */}
@@ -108,7 +118,9 @@ const Messages = () => {
                 {messages.map((msg, index) => (
                   <div
                     key={index}
-                    className={`message ${msg.sender === "You" ? "sent" : "received"}`}
+                    className={`message ${
+                      msg.sender === "You" ? "sent" : "received"
+                    }`}
                   >
                     <p>{msg.text}</p>
                   </div>

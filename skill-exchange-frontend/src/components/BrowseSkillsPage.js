@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Updated to use useNavigate for navigation
 import "./BrowseSkillsPage.css";
 
 const BrowseSkillsPage = () => {
@@ -9,7 +9,7 @@ const BrowseSkillsPage = () => {
     { id: "3", skillName: "Cooking", category: "Cooking", details: "Learn to cook delicious meals" },
   ]);
   const [filters, setFilters] = useState({ skillName: "", category: "" });
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize navigate for page redirection
 
   useEffect(() => {
     // Simulate filtering logic for skills
@@ -29,26 +29,51 @@ const BrowseSkillsPage = () => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
+  // Handlers for navigation
+  const navigateToProfile = () => navigate("/profile");
+  const navigateToHistory = () => navigate("/history");
+  const navigateToMessages = () => navigate("/messages");
+  const navigateToSetupSession = () => navigate("/setup-session");
+
   return (
     <div className="browse-skills-page">
       {/* Navigation Bar */}
       <header className="navbar">
-        <NavLink to="/browse" activeClassName="active-link">
+        <a
+          href="#browse-skills"
+          onClick={() => navigate("/browse")}
+          className="nav-link"
+        >
           Browse Skills
-        </NavLink>
-        <NavLink to="/setup-session" activeClassName="active-link">
+        </a>
+        <a
+          href="#setup-session"
+          onClick={navigateToSetupSession}
+          className="nav-link"
+        >
           Set Up Session
-        </NavLink>
-        <NavLink to="/history" activeClassName="active-link">
+        </a>
+        <a
+          href="#history"
+          onClick={navigateToHistory}
+          className="nav-link"
+        >
           History
-        </NavLink>
-        <NavLink to="/messages" activeClassName="active-link">
+        </a>
+        <a
+          href="#messages"
+          onClick={navigateToMessages}
+          className="nav-link"
+        >
           Messages
-        </NavLink>
-        <NavLink to="/profile" activeClassName="active-link">
+        </a>
+        <a
+          href="#profile"
+          onClick={navigateToProfile}
+          className="nav-link"
+        >
           Profile
-        </NavLink>
-        <button onClick={() => navigate("/logout")}>Logout</button>
+        </a>
       </header>
 
       {/* Page Content */}
@@ -73,7 +98,9 @@ const BrowseSkillsPage = () => {
           {skills.map((skill) => (
             <div key={skill.id} className="skill-card">
               <h2>{skill.skillName}</h2>
-              <p><strong>Category:</strong> {skill.category}</p>
+              <p>
+                <strong>Category:</strong> {skill.category}
+              </p>
               <p>{skill.details}</p>
             </div>
           ))}

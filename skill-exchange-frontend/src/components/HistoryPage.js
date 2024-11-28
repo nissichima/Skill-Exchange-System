@@ -49,20 +49,40 @@ const History = () => {
     fetchSessions();
   }, []);
 
+  // Navigation Handlers
+  const navigateToBrowse = () => navigate("/browse");
+  const navigateToSetupSession = () => navigate("/setup-session");
+  const navigateToMessages = () => navigate("/messages");
+  const navigateToProfile = () => navigate("/profile");
+
   return (
     <div className="history-page">
-      <h1>History</h1>
-      <nav>
-        <ul className="nav-links">
-          <li onClick={() => navigate("/browse")}>Browse Skills</li>
-          <li onClick={() => navigate("/setup-session")}>Set Up Session</li>
-          <li onClick={() => navigate("/history")}>History</li>
-          <li onClick={() => navigate("/messages")}>Messages</li>
-          <li onClick={() => navigate("/profile")}>Profile</li>
-          <li onClick={() => navigate("/logout")}>Logout</li>
-        </ul>
-      </nav>
+      {/* Navigation Bar */}
+      <header className="navbar">
+        <a href="#browse-skills" onClick={navigateToBrowse} className="nav-link">
+          Browse Skills
+        </a>
+        <a
+          href="#setup-session"
+          onClick={navigateToSetupSession}
+          className="nav-link"
+        >
+          Set Up Session
+        </a>
+        <a href="#history" onClick={() => navigate("/history")} className="nav-link">
+          History
+        </a>
+        <a href="#messages" onClick={navigateToMessages} className="nav-link">
+          Messages
+        </a>
+        <a href="#profile" onClick={navigateToProfile} className="nav-link">
+          Profile
+        </a>
+      </header>
+
+      {/* Page Content */}
       <div className="history-container">
+        <h1>History</h1>
         <h2>Past Sessions</h2>
         {error && <div className="error">{error}</div>}
         {sessions.length === 0 ? (
