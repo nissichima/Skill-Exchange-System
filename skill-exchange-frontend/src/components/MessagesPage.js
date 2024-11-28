@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./MessagesPage.css";
 
-const Messages = () => {
+const MessagesPage = () => {
   const [recipients, setRecipients] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -145,4 +145,4 @@ const Messages = () => {
   );
 };
 
-export default MessagesPages;
+export default MessagesPage;

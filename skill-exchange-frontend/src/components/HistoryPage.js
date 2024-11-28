@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HistoryPage.css";
 
-const History = () => {
+const HistoryPage = () => {
   const [sessions, setSessions] = useState([
     {
       _id: "1",
