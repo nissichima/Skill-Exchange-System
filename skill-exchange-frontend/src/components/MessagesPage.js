@@ -116,7 +116,7 @@ const MessagesPage = () => {
                 {messages.map((msg, index) => (
                   <div
                     key={index}
-                    className={`messages ${
+                    className={`message ${
                       msg.sender === "You" ? "sent" : "received"
                     }`}
                   >
