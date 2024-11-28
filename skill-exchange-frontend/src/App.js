@@ -5,8 +5,8 @@ import Homepage from './components/Homepage';
 import AuthPage from './components/AuthPage'; // The login/signup page
 import ProfilePage from './components/ProfilePage';
 import BrowseSkillsPage from './components/BrowseSkillsPage';
-import Messages from "./components/Messages";
-import History from "./components/History";
+import Messages from "./components/MessagesPage";
+import History from "./components/HistoryPage";
 
 function App() {
   const location = useLocation(); // Hook to get the current route
