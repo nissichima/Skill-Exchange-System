@@ -16,7 +16,7 @@ const MessagesPage = () => {
     const fetchRecipients = async () => {
       try {
         const response = await axios.get("http://localhost:5001/api/messages/recipients");
-        setRecipientssetRecipients([
+        setRecipients([
           { id: 1, name: "John Doe" },
           { id: 2, name: "Jane Smith" }
         ]);
