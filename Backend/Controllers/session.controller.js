@@ -1,8 +1,11 @@
-import Session from "../models/Session.js";
+import Session from "../Models/session.model.js";
 import { sendSessionNotifications } from "../Services/emailService.js";
 
+export const fetchSession = async (req, res) => {
+
+};
 export const createSession = async (req, res) => {
-  const { organizer, participant, skill, dateTime, duration, locationType, organizerEmail, participantEmail } = req.body;
+  const { organizer, participant, skill, dateTime, duration, locationType} = req.body;
 
   try {
     const newSession = new Session({
@@ -12,8 +15,6 @@ export const createSession = async (req, res) => {
       dateTime,
       duration,
       locationType,
-      organizerEmail,
-      participantEmail
     });
 
     const savedSession = await newSession.save();
