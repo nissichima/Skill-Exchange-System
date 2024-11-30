@@ -22,3 +22,15 @@ export const updateProfile = async(req, res) =>{
         res.status(500).json({error: "Internal server error"});
     }
 }
+
+export const getProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).populate("offeredSkills").populate("seekedSkills");
+
+        if (!user){
+            return res.status(404).json({error: "User not found"});
+        }
+    } catch (error) {
+        res.status(500).json({message: "Error retrieving profile", error});
+    }
+}
