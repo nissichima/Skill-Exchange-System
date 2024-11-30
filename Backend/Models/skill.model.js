@@ -1,18 +1,13 @@
 import mongoose from "mongoose";
 
 const skillSchema = new mongoose.Schema({
-    skillName:{
+    name:{
         type:String,
         required:true,
     },
     category: {
         type:String,
         required:true,
-    },
-    offeringUser:{
-        type:String,
-        required:true,
-        unique:true
     },
     details:{
         type:String,
