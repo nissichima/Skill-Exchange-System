@@ -1,17 +1,18 @@
+import mongoose from "mongoose";
 import Session from '../Models/session.model.js';
 import Rating from '../Models/rating.model.js';
 
+
 // Function to handle rating submission
 export const submitRating = async (req, res) => {
-    try {
-        const { sessionId, rating, feedback, ratedUser } = req.body;
-
+    try {        
+        const { sessionId, ratedBy, ratedUser, rating, feedback} = req.body;       
+        const sessionObjectId = new mongoose.Types.ObjectId(sessionId);        
         // Find the session by ID
-        const session = await Session.findById(sessionId);
-        console.log("Session Found: ", session); // Debugging
+        const session = await Session.findById(sessionObjectId);
         if (!session) {
-            return res.status(400).json({ error: 'Session not found' });
-        }
+            return res.status(400).json({ error: "Session not found" });
+        }        
 
         // Calculate the session end time by adding the duration to the start time
         const sessionEndTime = new Date(session.dateTime);
