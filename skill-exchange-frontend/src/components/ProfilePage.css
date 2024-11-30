@@ -1,0 +1,246 @@
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.profile-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Gradient background */
+  background: linear-gradient(
+    45deg,
+    #84ceeb,
+    #c1c8e4,
+    #8860d0
+  );
+  background-size: 400% 400%; /* Makes gradient cover the entire page */
+  animation: gradient 15s ease infinite;
+
+  /* Ensure it fills the viewport */
+  min-height: 100vh; /* Full height of the viewport */
+  width: 100%; /* Full width of the viewport */
+}
+
+
+/* Shared header styling */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #c1c8e4;
+  color: white;
+  margin: 0; /* Removes space at the top */
+  position: relative; /* Ensure proper positioning */
+  width: 100%; /* Expands to full width of the viewport */
+
+}
+
+.profile-header .logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding-left: 2rem; /* Add padding to the left of the logo */
+
+}
+
+.profile-header .logo-link {
+  text-decoration: none; /* Removes the underline */
+  color: white; /* Changes text color to white */
+  font-size: inherit; /* Keeps the same font size as the logo container */
+  font-weight: inherit; /* Inherits font weight from the parent */
+  transition: color 0.2s ease; /* Smooth color transition on hover */
+}
+
+.profile-header .logo-link:hover {
+  color: #8860d0; /* Optional: Add a hover effect */
+}
+
+/* Navigation links styling for the profile page */
+.profile-header .nav-links {
+  display: flex;
+  gap: 1.5rem; /* Add spacing between links */
+  list-style: none;
+}
+
+.profile-header .nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem; /* Increase size */
+  font-weight: bold;
+  padding: 0.5rem 1rem; /* Adds padding */
+  transition: transform 0.2s ease;
+}
+
+.profile-header .nav-links li a:hover {
+  color: #8860d0; /* Change color on hover */
+  text-decoration: underline;
+  transform: scale(1.2); /* Slightly enlarge */
+}
+
+.profile-header h1 {
+  margin: 0;
+}
+
+.nav-bar {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-bar a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.nav-bar a.active {
+  background-color: #84CEEB;
+  border-radius: 5px;
+}
+
+/* Main Content */
+.profile-content {
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Left Section */
+.profile-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  background-color: #ddd;
+  border-radius: 50%;
+  background-image: url('./user.jpg'); /* Path to your image */
+  background-size: cover; /* Ensures the image fills the circle */
+  background-position: center; /* Centers the image within the circle */
+}
+
+.profile-name h2 {
+  margin: 0;
+}
+
+.profile-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-buttons .edit-button {
+  background-color: #5AB9EA;
+  color: white;
+}
+
+.profile-buttons .save-button {
+  background-color: #5AB9EA;
+  color: white;
+}
+
+/* Right Section */
+.profile-right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 20px;
+}
+/* General Button Styles */
+button {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #5ab9ea; /* Light blue */
+  color: white;
+  padding: 10px 15px; /* Padding for better spacing */
+  font-size: 1rem; /* Text size */
+  font-weight: bold;
+}
+
+/* Edit Button */
+.edit-button {
+  background-color: #5ab9ea; /* Light blue */
+  color: white;
+  padding: 10px 15px; /* Padding for better spacing */
+  font-size: 1rem; /* Text size */
+  font-weight: bold;
+}
+
+.edit-button:hover {
+  background-color: #5680e9; /* Slightly darker blue on hover */
+  transform: scale(1.05); /* Slight enlargement on hover */
+}
+
+/* Save Button */
+.save-button {
+  background-color: #84ceeb; /* Light teal */
+  color: white;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 10px; /* Adds space between the "Add Skill" and "Save" buttons */
+
+}
+
+.save-button:hover {
+  background-color: #5680e9; /* Match hover effect with edit button */
+  transform: scale(1.05);
+}
+
+/* Remove Button (for skills) */
+button.remove-button {
+  background-color: #e74c3c; /* Red for remove action */
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+}
+
+button.remove-button:hover {
+  background-color: #c0392b; /* Darker red on hover */
+}
+
+.skills-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.skills-section h3 {
+  margin-top: 0;
+}
+
+.skills-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.skills-section li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.skills-section li:last-child {
+  border-bottom: none;
+}
+
