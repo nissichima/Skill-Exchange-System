@@ -110,7 +110,9 @@ export const requestPasswordReset = async (req, res) => {
       await user.save();
   
       // Send email with reset link
+
       const resetLink = `http://localhost:5000/api/auth/password-reset/${resetToken}`;
+
       const msg = {
         to: user.email,
         from: fromEmail,
@@ -135,6 +137,7 @@ export const requestPasswordReset = async (req, res) => {
     try {
       // Verify the reset token
       const decoded = jwt.verify(token, "168e2bad30a3957a9761be7313c2e4496142cfee0f71302e80e114b8ca5cef4e");
+
       const user = await User.findOne({
         _id: decoded.id,
         resetToken: token,
@@ -146,8 +149,10 @@ export const requestPasswordReset = async (req, res) => {
       }
       
       user.password = newPassword;  
-      user.resetToken = undefined;
-      user.resetTokenExpiration = undefined;
+
+      user.resetToken = undefined; // Clear the reset token
+      user.resetTokenExpiration = undefined; // Clear expiration
+
       await user.save();
   
       res.status(200).json({ message: "Password successfully updated" });
@@ -156,4 +161,4 @@ export const requestPasswordReset = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   };
-//
+

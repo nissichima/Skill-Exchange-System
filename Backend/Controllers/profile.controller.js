@@ -23,3 +23,23 @@ export const updateProfile = async(req, res) =>{
     }
 }
 
+export const getProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id)
+            .populate("offeredSkills")
+            .populate("seekedSkills");
+
+        if (!user){
+            return res.status(404).json({error: "User not found"});
+        }
+
+        res.status(200).json({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            offeredSkills: user.offeredSkills,
+            offeredSkills: user.seekedSkills
+        })
+    } catch (error) {
+        res.status(500).json({message: "Error retrieving profile", error});
+    }
+}
