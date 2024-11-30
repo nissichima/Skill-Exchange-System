@@ -9,6 +9,7 @@ import sessionRoutes from "./Routes/session.routes.js";
 import cors from 'cors';
 import skillRoutes from "./Routes/skill.routes.js";
 import profileRoutes from "./Routes/profile.routes.js";
+import ratingRoutes from "./Routes/rating.routes.js";
 
 
 
@@ -31,6 +32,7 @@ app.use("/api/messages", messageRoutes)
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/skills", skillRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/rating", ratingRoutes);
 
 
 app.get("/", (req, res) =>{

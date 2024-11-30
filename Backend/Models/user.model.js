@@ -35,7 +35,9 @@ const userSchema = new mongoose.Schema({
     offeredSkills:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Skill"
-    }]
+    }],
+    resetToken: { type: String }, // Token for password reset
+    resetTokenExpiration: { type: Date }, // Token expiry time
 },
 {timestamps:true});
 
