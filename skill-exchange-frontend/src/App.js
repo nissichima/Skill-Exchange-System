@@ -9,6 +9,9 @@ import MessagesPage from "./components/MessagesPage";
 import HistoryPage from "./components/HistoryPage";
 import ForgotPassword from './components/ForgotPassword'; // Forgot password page component
 import ResetPasswordPage from './components/ResetPasswordPage'; // Import the ResetPasswordPage component
+import SetUpSession from './components/SetUpSession';
+import RateSession from './components/RateSession';
+
 
 function App() {
   const location = useLocation(); // Hook to get the current route
@@ -29,6 +32,9 @@ function App() {
 
         <Route path= "/message" element={<MessagesPage />} /> {/*New Route for Messages */}
         <Route path= "/history" element={<HistoryPage />} />
+        <Route path="/setup-session" element={<SetUpSession />} />
+        <Route path="/rate-session" element={<RateSession />} />
+
 
       </Routes>
     </div>
