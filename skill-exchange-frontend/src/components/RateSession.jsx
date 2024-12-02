@@ -1,12 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./RateSession.css";
 
-const RateSession = () => {
+const RateSession = ({ sessionId, currentUserId }) => {
+  const [participantName, setParticipantName] = useState("--Participant Name--");
+  const [ratedUserId, setRatedUserId] = useState("");
   const [feedback, setFeedback] = useState("");
   const [rating, setRating] = useState("");
 
+  // Fetch session details
+  useEffect(() => {
+    axios.get(`/api/session-details/${sessionId}`)
+      .then((response) => {
+        setParticipantName(response.data.participantName);
+        setRatedUserId(response.data.participantId); // Assuming this is returned by the backend
+      })
+      .catch((error) => {
+        console.error("Error fetching session details:", error);
+      });
+  }, [sessionId]);
+
   const handleSubmit = () => {
-    alert(`Feedback submitted: ${rating} - ${feedback}`);
+    const feedbackData = { 
+      sessionId, 
+      ratedBy: currentUserId, 
+      ratedUser: ratedUserId, 
+      rating, 
+      feedback 
+    };
+    axios.post("/api/feedback", feedbackData)
+      .then(() => {
+        alert("Feedback submitted successfully!");
+      })
+      .catch((error) => {
+        console.error("Error submitting feedback:", error);
+        alert("Failed to submit feedback.");
+      });
   };
 
   return (
@@ -15,13 +44,13 @@ const RateSession = () => {
         <h1>Rate & Feedback</h1>
       </header>
       <form className="rate-form" onSubmit={(e) => e.preventDefault()}>
-        <p>Your session with <strong>--Participant Name--</strong> ended.</p>
+        <p>Your session with <strong>{participantName}</strong> ended.</p>
         <p>Was the session good or bad?</p>
         <div className="rating-buttons">
-          <button type="button" onClick={() => setRating("Good")}>
+          <button type="button" onClick={() => setRating("good")}>
             Good
           </button>
-          <button type="button" onClick={() => setRating("Bad")}>
+          <button type="button" onClick={() => setRating("bad")}>
             Bad
           </button>
         </div>
