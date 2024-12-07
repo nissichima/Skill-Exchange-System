@@ -3,7 +3,7 @@ Skill Exchange, a collaborative initiative aimed at facilitating the exchange of
 
 <img width="505" alt="Screenshot 2024-12-07 at 1 27 17 PM" src="https://github.com/user-attachments/assets/3ad6adc4-4f39-4db5-9aa2-5324c07c87cc">
 
-##Tech Stack
+## Tech Stack
 - MongoDB
 - Express.js
 - React.js
